@@ -1,5 +1,6 @@
 from threading import Thread
 from time import perf_counter
+import sys
 
 def calc_time(func):
     def wrapper(*args, **kwargs):
@@ -21,7 +22,7 @@ def count_to_million():
 def count_x_times_single_thread(func, n):
     for _ in range(n):
         func()
-    print(f"Single-threaded")
+    print(f"Single-threaded", end=': ')
 
 @calc_time
 def count_x_times_multi_thread(func, n):
@@ -30,8 +31,9 @@ def count_x_times_multi_thread(func, n):
         th.start()
     for th in threads:
         th.join()
-    print(f"Multi-threaded")
+    print(f"Multi-threaded", end=': ')
 
 if __name__ == '__main__':
+    print(f"Is GIL enabled? {sys._is_gil_enabled()}")
     count_x_times_single_thread(count_to_million,100)
     count_x_times_multi_thread(count_to_million,100)
