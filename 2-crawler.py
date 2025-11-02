@@ -1,6 +1,6 @@
 import sys
 import urllib.request
-from threading import Thread
+from concurrent.futures import ThreadPoolExecutor
 import asyncio
 import aiohttp
 
@@ -28,14 +28,13 @@ def crawl_single_thread(func):
 
 @calc_time
 def crawl_multi_thread(func):
-    threads = []
-    for link in links:
-        threads.append(Thread(target=func, args=(link,)))
-    for th in threads:
-        th.start()
-    for th in threads:
-        th.join()
-    print(f"Multi-threaded {len(links)} threads", end=': ')
+    with ThreadPoolExecutor(max_workers=len(links)) as executor:
+        futures = []
+        for link in links:
+            futures.append(executor.submit(func, link))
+        for future in futures:
+            future.result()
+    print(f"Thread Pool {len(links)} threads", end=': ')
 
 async def crawl_async(link, timeout):
     print(f"crawl started for {link}")
@@ -59,7 +58,7 @@ if __name__ == '__main__':
     match sys.argv[1:]:
         case ["single"]:
             crawl_single_thread(crawl)
-        case ["multi"]:
+        case ["mt"]:
             crawl_multi_thread(crawl)
         case ["async"]:
             asyncio.run(async_main(crawl_async))

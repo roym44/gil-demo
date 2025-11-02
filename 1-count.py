@@ -40,7 +40,7 @@ if __name__ == '__main__':
     match sys.argv[1:]:
         case ["single", n]:
             count_x_single_thread(count_x, int(n))
-        case ["multi", n]:
+        case ["mt", n]:
             count_x_multi_thread(count_x, int(n))
         case ["pool", n]:
             count_x_thread_pool(count_x, int(n))
