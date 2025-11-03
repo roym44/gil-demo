@@ -55,7 +55,7 @@ This example demonstrates *CPU-bound* and *IO-bound* tasks using a simple web se
 - There is a sync version using **Flask** and an async one using **FastAPI**.
 - To run a controlled experiment both server apps are run using [**Granian**](https://github.com/emmett-framework/granian).
 - To run the client there are implementation for **sync**/**async** accordingly.
-- Here we see 
+- Here we see clear advantage in **IO-bound** tasks for **async** over **sync**.
 
 Flask App:
 ```bash
