@@ -60,12 +60,14 @@ This example demonstrates *CPU-bound* and *IO-bound* tasks using a simple web se
 Flask App:
 ```bash
 python3.14 -m granian --interface wsgi --workers 1 servers.sync_flask:app --port 8001
+python3.14t -m granian --interface wsgi --workers 1 servers.sync_flask:app --port 8001
 python3.14 4-api.py sync cpu
 python3.14 4-api.py sync io
 ```
 FastAPI App:
 ```bash
 python3.14 -m granian --interface asgi --loop asyncio --workers 1 servers.async_fastapi:app --port 8002
+python3.14t -m granian --interface asgi --loop asyncio --workers 1 servers.async_fastapi:app --port 8002
 python3.14 4-api.py async cpu
 python3.14 4-api.py async io
 ```

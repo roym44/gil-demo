@@ -10,17 +10,17 @@ FLASK_PORT = 8001
 FASTAPI_PORT = 8002
 
 @calc_time
-def sync_bench(url: str, total=10, threads=10):
+def sync_bench(url: str, total=20, workers=10):
     def worker():
         r = requests.get(url)
         return r.status_code
 
-    with ThreadPoolExecutor(max_workers=threads) as ex:
+    with ThreadPoolExecutor(max_workers=workers) as ex:
         results = list(ex.map(lambda _: worker(), range(total)))
     print(f"Completed {len(results)} requests")
 
 @async_calc_time
-async def async_bench(url: str, total=10, workers=10):
+async def async_bench(url: str, total=20, workers=10):
     sem = asyncio.Semaphore(workers)
     counter = 0
     async with httpx.AsyncClient(timeout=10.0) as client:
