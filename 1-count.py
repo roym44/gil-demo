@@ -2,14 +2,8 @@ import sys
 from concurrent.futures import ThreadPoolExecutor
 from threading import Thread
 
-from utils import calc_time
-
-def count_x():
-    x = 0
-    for _ in range(10_000_000):
-        x += 1
-    return x
-
+from utils.utils import calc_time
+from utils.cpu import count_x
 
 @calc_time
 def count_x_single_thread(func, n):

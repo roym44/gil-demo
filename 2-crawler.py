@@ -1,24 +1,12 @@
 import sys
-import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 import asyncio
 import aiohttp
 
 
-from utils import calc_time, async_calc_time
+from utils.utils import calc_time, async_calc_time
+from utils.io import crawl, crawl_async, links
 
-links = [
-    "https://python.org",
-    "https://docs.python.org",
-    "https://peps.python.org",
-]
-
-def crawl(link, timeout=5):
-    print(f"crawl started for {link}")
-    with urllib.request.urlopen(link, timeout=timeout) as conn:
-        data = conn.read()
-    print(f"crawl ended for {link}")
-    return data
 
 @calc_time
 def crawl_single_thread(func):
@@ -36,13 +24,7 @@ def crawl_multi_thread(func):
             future.result()
     print(f"Thread Pool {len(links)} threads", end=': ')
 
-async def crawl_async(link, timeout):
-    print(f"crawl started for {link}")
-    async with aiohttp.ClientSession(timeout=timeout) as session:
-        async with session.get(link, timeout=timeout) as resp:
-            data = await resp.read()
-    print(f"crawl ended for {link}")
-    return data
+
 
 @async_calc_time
 async def async_main(func):

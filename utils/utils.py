@@ -1,6 +1,5 @@
 from time import perf_counter
 
-
 def calc_time(func):
     def wrapper(*args, **kwargs):
         start = perf_counter()
