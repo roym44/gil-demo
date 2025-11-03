@@ -1,1 +1,5 @@
 aiohttp
+fastapi
+uvicorn
+flask
+granian
