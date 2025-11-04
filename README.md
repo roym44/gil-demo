@@ -20,14 +20,14 @@ This example demonstrates a simple *CPU-bound* task (counting by incrementing a 
 - Here we see significant improvement in **mt** comparing GIL to NOGIL.
 
 ```bash
-python3.14 1-count.py mt 30
-python3.14t 1-count.py mt 30
+python3.14 1-count.py mt 40
+python3.14t 1-count.py mt 40
 ```
 
 ### example-2
 This example demonstrates a simple *IO-bound* task (crawling 3 URLs).
 - This can be run **single/mt/async** for **n** times on **n** threads.
-- Here we see the improvement from one to the next one, with GIL.
+- Here we see the improvement in **mt** and **async**, with GIL.
 
 ```bash
 python3.14 2-crawler.py single
@@ -43,9 +43,9 @@ This example demonstrates the same simple *CPU-bound* task (counting by incremen
 - Here we see significant improvement in **mt** (NOGIL) compared to **mp** in terms of memory.
 
 ```bash
-python3.14t 3-count.py mp 80 200
-python3.14 3-count.py mt 80 200
-python3.14t 3-count.py mt 80 200
+python3.14t 3-count.py mp 60 200
+python3.14 3-count.py mt 60 200
+python3.14t 3-count.py mt 60 200
 ```
 
 ### example-4

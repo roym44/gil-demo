@@ -3,7 +3,6 @@ from concurrent.futures import ThreadPoolExecutor
 import asyncio
 import aiohttp
 
-
 from utils.utils import calc_time, async_calc_time
 from utils.io import crawl, crawl_async, links
 
